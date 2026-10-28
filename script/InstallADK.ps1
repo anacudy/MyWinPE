@@ -7,13 +7,12 @@ Start-Process -Wait -FilePath aria2c -ArgumentList $argumentList
 
 $argumentList = @(
   "/quiet",
-  "/features", "OptionId.DeploymentTools",
-  "/log", "adksetup.log"
+  "/features",
+  "OptionId.DeploymentTools"
 )
 Start-Process -Wait -FilePath adksetup -ArgumentList $argumentList
 
 $argumentList = @(
-  "/quiet",
-  "/log", "adkwinpesetup.log"
+  "/quiet"
 )
 Start-Process -Wait -FilePath adkwinpesetup -ArgumentList $argumentList
