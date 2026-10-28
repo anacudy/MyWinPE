@@ -3,7 +3,7 @@ $argumentList = @(
   "--conf-path=aria2.conf",
   "--input-file=adk.txt"
 )
-aria2c $argumentList
+Start-Process -Wait -FilePath aria2c -ArgumentList $argumentList
 
 $argumentList = @(
   "/quiet",
