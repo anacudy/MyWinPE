@@ -17,17 +17,19 @@ jobs:
 
       - name: Copype
         shell: cmd
-        run: |
-          set WinPE=%CD%\WinPE
-          call "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\DandISetEnv.bat"
-          copype amd64 %WinPE%
+        run: script\xxx.cmd
 
-      - name: MakeWinPEMedia
-        shell: cmd
-        run: |
-          set WinPE=%CD%\WinPE
-          call "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\DandISetEnv.bat"
-          MakeWinPEMedia /ISO %WinPE% %WinPE%.iso /bootex
+      # - name: Test
+      #   run: |
+      #     ls WinPE
+      #     ls WinPE\media
+
+      # - name: MakeWinPEMedia
+      #   shell: cmd
+      #   run: |
+      #     set WinPE=%CD%\WinPE
+      #     call "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\DandISetEnv.bat"
+      #     MakeWinPEMedia /ISO %WinPE% %WinPE%.iso /bootex
 
       - name: Get Hash
         run: script\GetHash.ps1
