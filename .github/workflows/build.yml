@@ -12,6 +12,9 @@ jobs:
       - name: Install ADK
         run: script\InstallADK.ps1
 
+      - name: Test
+        run: ls "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit"
+
       - name: Copype
         shell: cmd
         run: |
@@ -24,13 +27,8 @@ jobs:
           call "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\DandISetEnv.bat"
           call MakeWinPEMedia /ISO %CD%\WinPE %CD%\WinPE.iso /bootex
 
-      - name: Test
-        run: ls
-
-      - name: Upload Logs
+      - name: Upload logs
+        if: always()
         uses: actions/upload-artifact@v7
-        if: ${{ always() }}
         with:
-          name: adksetup.log
-          path: *.log
-          compression-level: 9
+          path: "*.log"
