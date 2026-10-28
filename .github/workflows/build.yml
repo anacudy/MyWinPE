@@ -16,13 +16,13 @@ jobs:
         shell: cmd
         run: |
           call "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\DandISetEnv.bat"
-          copype amd64 %CD%\WinPE
+          call copype amd64 %CD%\WinPE
 
       - name: MakeWinPEMedia
         shell: cmd
         run: |
           call "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\DandISetEnv.bat"
-          MakeWinPEMedia /ISO %CD%\WinPE %CD%\WinPE.iso /bootex
+          call MakeWinPEMedia /ISO %CD%\WinPE %CD%\WinPE.iso /bootex
 
       - name: Test
         run: ls
