@@ -81,7 +81,7 @@ dism /Unmount-Image /MountDir:"%MOUNT_DIR%" /commit
 if errorlevel 1 exit /b 1
 
 echo Creating ISO...
-MakeWinPEMedia /ISO "%WINPE_DIR%" "%WinPE%.iso" /bootex
+MakeWinPEMedia /ISO "%WINPE_DIR%" "%WINPE_DIR%.iso" /bootex
 if errorlevel 1 exit /b 1
 
 echo Done
