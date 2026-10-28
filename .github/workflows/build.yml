@@ -13,19 +13,23 @@ jobs:
         run: script\InstallADK.ps1
 
       - name: Test
-        run: ls "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit"
+        run: |
+          ls "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools"
+          ls "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment"
 
       - name: Copype
         shell: cmd
         run: |
+          set WinPE=%CD%\WinPE
           call "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\DandISetEnv.bat"
-          echo %CD%
+          echo %WinPE%
 
       - name: MakeWinPEMedia
         shell: cmd
         run: |
+          set WinPE=%CD%\WinPE
           call "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\DandISetEnv.bat"
-          echo %CD%
+          echo %WinPE%
 
       - name: Test
         run: ls
