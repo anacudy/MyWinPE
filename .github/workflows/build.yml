@@ -27,6 +27,9 @@ jobs:
           call "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\DandISetEnv.bat"
           call MakeWinPEMedia /ISO %CD%\WinPE %CD%\WinPE.iso /bootex
 
+      - name: Test
+        run: ls
+
       - name: Upload logs
         if: always()
         uses: actions/upload-artifact@v7
