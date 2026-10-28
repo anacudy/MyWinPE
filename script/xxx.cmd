@@ -10,7 +10,7 @@ set "OC_PATH=%WinPERoot%\amd64\WinPE_OCs"
 set "LANG_PATH=%OC_PATH%\zh-cn"
 
 echo Creating WinPE...
-copype amd64 "%WINPE_DIR%"
+call copype amd64 "%WINPE_DIR%"
 if errorlevel 1 exit /b 1
 
 echo Mounting...
@@ -81,7 +81,7 @@ dism /Unmount-Image /MountDir:"%MOUNT_DIR%" /commit
 if errorlevel 1 exit /b 1
 
 echo Creating ISO...
-MakeWinPEMedia /ISO "%WINPE_DIR%" "%WINPE_DIR%.iso" /bootex
+call MakeWinPEMedia /ISO "%WINPE_DIR%" "%WINPE_DIR%.iso" /bootex
 if errorlevel 1 exit /b 1
 
 echo Done
