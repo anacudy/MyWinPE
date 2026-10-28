@@ -5,5 +5,5 @@ $argumentList = @(
 )
 aria2c $argumentList
 
-.\adksetup /quiet /features OptionId.DeploymentTools
-.\adkwinpesetup /quiet
+.\adksetup /quiet /features OptionId.DeploymentTools /log adksetup.log
+.\adkwinpesetup /quiet /log adkwinpesetup.log
