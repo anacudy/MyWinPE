@@ -1,0 +1,9 @@
+# Windows ADK 10.1.26100.9457 (September 2026)
+https://go.microsoft.com/fwlink/?linkid=2289980
+  out=adksetup.exe
+  checksum=sha-1=f8eb6a9c155b2bc93d460f29e9bcbb8f1e1a2683
+
+# Windows PE add-on for the Windows ADK 10.1.26100.9457 (September 2026)
+https://go.microsoft.com/fwlink/?linkid=2289981
+  out=adkwinpesetup.exe
+  checksum=sha-1=51316d9e9d383e5903a2cc3046635ef6b05b2376
