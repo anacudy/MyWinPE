@@ -5,6 +5,9 @@ jobs:
   build:
     runs-on: windows-2025
 
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v7
@@ -12,24 +15,29 @@ jobs:
       - name: Install ADK
         run: script\InstallADK.ps1
 
-      - name: Test
-        run: |
-          ls "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools"
-          ls "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment"
-
       - name: Copype
         shell: cmd
         run: |
           set WinPE=%CD%\WinPE
           call "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\DandISetEnv.bat"
-          echo %WinPE%
+          copype amd64 %WinPE%
 
       - name: MakeWinPEMedia
         shell: cmd
         run: |
           set WinPE=%CD%\WinPE
           call "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\DandISetEnv.bat"
-          echo %WinPE%
+          MakeWinPEMedia /ISO %WinPE% %WinPE%.iso /bootex
 
-      - name: Test
-        run: ls
+      - name: Get Hash
+        run: script\GetHash.ps1
+
+      - name: Compress
+        run: 7z a -mx WinPE.7z WinPE.iso
+
+      - name: Release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: latest
+          files: WinPE.7z
+          body_path: WinPE.md5
