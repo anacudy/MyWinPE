@@ -15,31 +15,22 @@ jobs:
       - name: Install ADK
         run: script\InstallADK.ps1
 
+      - name: Prepare
+        run: script\Prepare.ps1
+
       - name: Copype
         shell: cmd
         run: script\xxx.cmd
 
-      # - name: Test
-      #   run: |
-      #     ls WinPE
-      #     ls WinPE\media
+      # - name: Get Hash
+      #   run: script\GetHash.ps1
 
-      # - name: MakeWinPEMedia
-      #   shell: cmd
-      #   run: |
-      #     set WinPE=%CD%\WinPE
-      #     call "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\DandISetEnv.bat"
-      #     MakeWinPEMedia /ISO %WinPE% %WinPE%.iso /bootex
-
-      - name: Get Hash
-        run: script\GetHash.ps1
-
-      - name: Compress
-        run: 7z a -mx WinPE.7z WinPE.iso
+      # - name: Compress
+      #   run: 7z a -mx WinPE.7z WinPE.iso
 
       - name: Release
         uses: softprops/action-gh-release@v3
         with:
           tag_name: latest
-          files: WinPE.7z
-          body_path: WinPE.md5
+          files: C:\Windows\Logs\DISM\*
+          # body_path: WinPE.md5
