@@ -1,5 +1,5 @@
 $destination = 'WinPE_OC'
-# $source = 'C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\amd64\WinPE_OCs'
+$source = 'C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\amd64\WinPE_OCs'
 
 New-Item -ItemType Directory -Path $destination\0
 Copy-Item -Destination $destination\0 -Path $source\*.cab
