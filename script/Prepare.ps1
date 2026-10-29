@@ -1,5 +1,4 @@
-# $PATH = "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\amd64"
-$PATH = "D:\adk\Assessment and Deployment Kit\Windows Preinstallation Environment\amd64"
+$PATH = "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\amd64"
 
 Rename-Item -Path "$PATH\Media" -NewName "Media_Backup"
 New-Item -ItemType Directory -Path "$PATH\Media"
