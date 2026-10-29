@@ -31,9 +31,13 @@ jobs:
       # - name: Compress
       #   run: 7z a -mx WinPE.7z WinPE.iso
 
-      # - name: Release
-      #   uses: softprops/action-gh-release@v3
-      #   with:
-      #     tag_name: latest
-      #     files: C:\Windows\Logs\DISM\*
-      # body_path: WinPE.md5
+      - name: Test
+        run: ls
+
+      - name: Release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: latest
+          files: |
+            WinPE.iso
+            C:\Windows\Logs\DISM\*
