@@ -19,12 +19,9 @@ DISM /Add-Package /Image:"%MOUNT_PATH%" /PackagePath:"%PACKAGE_PATH%\2" || exit 
 
 DISM /Add-Package /Image:"%MOUNT_PATH%" /PackagePath:"%PACKAGE_PATH%\zh-cn" || exit /b
 
-@REM echo Setting locale...
-@REM dism /Image:"%MOUNT_PATH%" /Set-AllIntl:zh-CN
-@REM dism /Image:"%MOUNT_PATH%" /Set-TimeZone:"China Standard Time"
-@REM dism /Image:"%MOUNT_PATH%" /Set-InputLocale:0804:00000804
-@REM dism /Image:"%MOUNT_PATH%" /Set-UserLocale:zh-CN
-@REM dism /Image:"%MOUNT_PATH%" /Set-SysLocale:zh-CN
+DISM /Set-AllIntl:zh-CN /Image:"%MOUNT_PATH%" || exit /b
+
+DISM /Set-TimeZone:"China Standard Time" /Image:"%MOUNT_PATH%" || exit /b
 
 DISM /Unmount-Image /Commit /CheckIntegrity /MountDir:"%MOUNT_PATH%" || exit /b
 

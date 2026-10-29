@@ -1,34 +1,74 @@
-$destination = 'WinPE_OC'
-$source = 'C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\amd64\WinPE_OCs'
+# $PATH = "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\amd64"
+$PATH = "D:\adk\Assessment and Deployment Kit\Windows Preinstallation Environment\amd64"
 
-New-Item -ItemType Directory -Path $destination\0
-Copy-Item -Destination $destination\0 -Path $source\*.cab
-Remove-Item -Path $destination\0\WinPE-Fonts-Legacy.cab
-Remove-Item -Path $destination\0\WinPE-FontSupport-JA-JP.cab
-Remove-Item -Path $destination\0\WinPE-FontSupport-KO-KR.cab
-Remove-Item -Path $destination\0\WinPE-FontSupport-WinRE.cab
-Remove-Item -Path $destination\0\WinPE-FontSupport-ZH-HK.cab
-Remove-Item -Path $destination\0\WinPE-FontSupport-ZH-TW.cab
-Remove-Item -Path $destination\0\WinPE-PmemCmdlets.cab
-Remove-Item -Path $destination\0\WinPE-Setup-ASZ.cab
+Rename-Item -Path "$PATH\Media" -NewName "Media_Backup"
+New-Item -ItemType Directory -Path "$PATH\Media"
+@(
+  "Boot",
+  "EFI",
+  "zh-cn",
+  "bootmgr",
+  "bootmgr.efi"
+).ForEach({
+    Copy-Item -Recurse -Destination "$PATH\Media" -Path "$PATH\Media_Backup\$PSItem"
+  })
 
-New-Item -ItemType Directory -Path $destination\1
-Move-Item -Destination $destination\1 -Path $destination\0\WinPE-HTA.cab
-Move-Item -Destination $destination\1 -Path $destination\0\WinPE-NetFX.cab
-Move-Item -Destination $destination\1 -Path $destination\0\WinPE-PowerShell.cab
-Move-Item -Destination $destination\1 -Path $destination\0\WinPE-SecureStartup.cab
-Move-Item -Destination $destination\1 -Path $destination\0\WinPE-Setup-Client.cab
-Move-Item -Destination $destination\1 -Path $destination\0\WinPE-Setup-Server.cab
+New-Item -ItemType Directory -Path "WinPE_OC\0"
+@(
+  "WinPE-Dot3Svc.cab",
+  "WinPE-EnhancedStorage.cab",
+  "WinPE-FMAPI.cab",
+  "WinPE-FontSupport-ZH-CN.cab",
+  "WinPE-HSP-Driver.cab",
+  "WinPE-MDAC.cab",
+  "WinPE-PPPoE.cab",
+  "WinPE-RNDIS.cab",
+  "WinPE-Scripting.cab",
+  "WinPE-WDS-Tools.cab",
+  "WinPE-WinReCfg.cab",
+  "WinPE-WMI.cab"
+).ForEach({
+    Copy-Item -Destination "WinPE_OC\0" -Path "$PATH\WinPE_OCs\$PSItem"
+  })
+Copy-Item -Destination "WinPE_OC\0" -Path "$PATH\WinPE_OCs\zh-cn\lp.cab"
 
-New-Item -ItemType Directory -Path $destination\2
-Move-Item -Destination $destination\2 -Path $destination\0\WinPE-DismCmdlets.cab
-Move-Item -Destination $destination\2 -Path $destination\0\WinPE-PlatformID.cab
-Move-Item -Destination $destination\2 -Path $destination\0\WinPE-SecureBootCmdlets.cab
-Move-Item -Destination $destination\2 -Path $destination\0\WinPE-StorageWMI.cab
+New-Item -ItemType Directory -Path "WinPE_OC\1"
+@(
+  "WinPE-HTA.cab",
+  "WinPE-NetFx.cab",
+  "WinPE-PowerShell.cab",
+  "WinPE-SecureStartup.cab"
+).ForEach({
+    Copy-Item -Destination "WinPE_OC\1" -Path "$PATH\WinPE_OCs\$PSItem"
+  })
 
-Copy-Item -Destination $destination -Path $source\zh-cn -Recurse
-Move-Item -Destination $destination\0 -Path $destination\zh-cn\lp.cab
-Remove-Item -Path $destination\zh-cn\WinPE-PmemCmdlets_zh-cn.cab
-Remove-Item -Path $destination\zh-cn\WinPE-Rejuv_zh-cn.cab
-Remove-Item -Path $destination\zh-cn\WinPE-Setup-ASZ_zh-cn.cab
-Remove-Item -Path $destination\zh-cn\WinPE-SRT_zh-cn.cab
+New-Item -ItemType Directory -Path "WinPE_OC\2"
+@(
+  "WinPE-DismCmdlets.cab",
+  "WinPE-PlatformId.cab",
+  "WinPE-SecureBootCmdlets.cab",
+  "WinPE-StorageWMI.cab"
+).ForEach({
+    Copy-Item -Destination "WinPE_OC\2" -Path "$PATH\WinPE_OCs\$PSItem"
+  })
+
+New-Item -ItemType Directory -Path "WinPE_OC\zh-cn"
+@(
+  "WinPE-DismCmdlets_zh-cn.cab",
+  "WinPE-Dot3Svc_zh-cn.cab",
+  "WinPE-EnhancedStorage_zh-cn.cab",
+  "WinPE-HTA_zh-cn.cab",
+  "WinPE-MDAC_zh-cn.cab",
+  "WinPE-NetFx_zh-cn.cab",
+  "WinPE-PowerShell_zh-cn.cab",
+  "WinPE-PPPoE_zh-cn.cab",
+  "WinPE-RNDIS_zh-cn.cab",
+  "WinPE-Scripting_zh-cn.cab",
+  "WinPE-SecureStartup_zh-cn.cab",
+  "WinPE-StorageWMI_zh-cn.cab",
+  "WinPE-WDS-Tools_zh-cn.cab",
+  "WinPE-WinReCfg_zh-cn.cab",
+  "WinPE-WMI_zh-cn.cab"
+).ForEach({
+    Copy-Item -Destination "WinPE_OC\zh-cn" -Path "$PATH\WinPE_OCs\zh-cn\$PSItem"
+  })

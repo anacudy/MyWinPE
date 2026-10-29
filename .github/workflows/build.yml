@@ -15,9 +15,6 @@ jobs:
       - name: Install ADK
         run: script\InstallADK.ps1
 
-      - name: Test
-        run: script\Test.ps1
-
       - name: Prepare
         run: script\Prepare.ps1
 
@@ -28,11 +25,8 @@ jobs:
       # - name: Get Hash
       #   run: script\GetHash.ps1
 
-      # - name: Compress
-      #   run: 7z a -mx WinPE.7z WinPE.iso
-
-      - name: Test
-        run: ls
+      - name: Compress
+        run: 7z a -mx DISM.7z C:\Windows\Logs\DISM
 
       - name: Release
         uses: softprops/action-gh-release@v3
@@ -40,4 +34,4 @@ jobs:
           tag_name: latest
           files: |
             WinPE.iso
-            C:\Windows\Logs\DISM\*
+            DISM.7z
